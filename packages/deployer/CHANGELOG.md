@@ -4,6 +4,7 @@
 
     * Check dependencies when determining if contracts should be recompiled (#408)
     * Improve an error message for when deployer is supplied with an incorrect number of constructor arguments (#419)
+    * Export the `Compiler` (#TBD)
 
 ## v0.1.0 - _February 16, 2018_
 

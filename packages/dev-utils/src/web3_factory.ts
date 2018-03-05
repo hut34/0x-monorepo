@@ -6,9 +6,12 @@
 import ProviderEngine = require('web3-provider-engine');
 import RpcSubprovider = require('web3-provider-engine/subproviders/rpc');
 
-import { EmptyWalletSubprovider, FakeGasEstimateSubprovider } from '@0xproject/subproviders';
+import { EmptyWalletSubprovider, FakeGasEstimateSubprovider, GanacheSubprovider } from '@0xproject/subproviders';
+import * as _ from 'lodash';
+import * as process from 'process';
 
 import { constants } from './constants';
+import { getCoverageSubprovider } from './coverage';
 
 // HACK: web3 leaks XMLHttpRequest into the global scope and causes requests to hang
 // because they are using the wrong XHR package.
@@ -26,10 +29,23 @@ export const web3Factory = {
     },
     getRpcProvider(hasAddresses: boolean = true): Web3.Provider {
         const provider = new ProviderEngine();
+        if (process.env.COVERAGE) {
+            provider.addProvider(getCoverageSubprovider());
+        }
+        provider.addProvider(getCoverageSubprovider());
         if (!hasAddresses) {
             provider.addProvider(new EmptyWalletSubprovider());
         }
         provider.addProvider(new FakeGasEstimateSubprovider(constants.GAS_ESTIMATE));
+        // provider.addProvider(
+        //     new GanacheSubprovider({
+        //         logger: console,
+        //         verbose: false,
+        //         port: 8545,
+        //         networkId: 50,
+        //         mnemonic: 'concert load couple harbor equip island argue ramp clarify fence smart topic',
+        //     }),
+        // );
         provider.addProvider(
             new RpcSubprovider({
                 rpcUrl: constants.RPC_URL,

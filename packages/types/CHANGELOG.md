@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.4.0 - _TBD, 2018_
+
+    * Remove `JSONRPCPayload` (#TBD)
+
 ## v0.3.0 - _March 4, 2018_
 
     * Add `data` to `TxData` (#413)

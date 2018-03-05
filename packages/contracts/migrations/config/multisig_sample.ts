@@ -1,4 +1,4 @@
-import { MultiSigConfigByNetwork } from '../../types';
+import { MultiSigConfigByNetwork } from '../types';
 
 // Make a copy of this file named `multisig.js` and input custom params as needed
 export const multiSig: MultiSigConfigByNetwork = {
