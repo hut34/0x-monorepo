@@ -487,21 +487,33 @@ export interface OutdatedWrappedEtherByNetworkId {
     };
 }
 
-export interface TokenStateByAddress {
-    [address: string]: TokenState;
+export interface ItemByAddress<T> {
+    [address: string]: T;
 }
+
+export type TokenStateByAddress = ItemByAddress<TokenState>;
 
 export interface TokenState {
     balance: BigNumber;
     allowance: BigNumber;
     isLoaded: boolean;
+    price?: BigNumber;
 }
 
-export interface RelayerInfo {
-    headerUrl: string;
+// TODO: Add topTokens and headerUrl properties once available from backend
+export interface WebsiteBackendRelayerInfo {
     id: string;
     name: string;
-    marketShare: number;
-    topTokens: Token[];
+    dailyTxnVolume: string;
+    url: string;
+}
+
+export interface WebsiteBackendPriceInfo {
+    price: string;
+    address: string;
+}
+
+export interface WebsiteBackendGasInfo {
+    average: number;
 }
 // tslint:disable:max-file-line-count
